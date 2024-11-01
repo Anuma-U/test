@@ -27,24 +27,32 @@ class Cafe:
         self.tables = args
 
     def guest_arrival(self, *guests):
-        for guestss in guests:
+        for guest in guests:
             for table in self.tables:
-                if table.guest == None:
-                    table.guest = guestss.name
-                    potok1 = Thread(target=Guest.run, args=(table.guest, ))
-                    print(f"{table.guest} за стол номер {table.number}")
-                    potok1.start()
+                if table.guest is None:
+                    table.guest = guest
+                    guest.start()
                     break
             else:
-                self.queue.put(item=guestss.name)
-                print(f"{guestss.name} в очереди")
+                self.queue.put(guest)
+                print(f"{guest.name} в очереди")
 
 
     def discuss_guests(self):
-        while not(self.queue.empty()):
-            if threading.current_thread().is_alive():
-                print(f"{threading.current_thread()} покушал(-а) и ушёл(ушла)")
-                sleep(10)
+        while any(table.guest is not None for table in self.tables) or not self.queue.empty():
+            for table in self.tables:
+                guest = table.guest
+                if guest and (not guest.is_alive()):
+                    print(f"{guest.name} покушал(-а) и ушёл(ушла)")
+                    print(f"Стол номер {table.number} свободен")
+                    table.guest = None
+
+                    if not self.queue.empty():
+                        next_guest = self.queue.get()
+                        table.guest = next_guest
+                        print(f"{next_guest.name} вышел(-ла) из очереди и сел(-а) за стол номер {table.number}")
+                        next_guest.start()
+            sleep(1)
 
 
 
