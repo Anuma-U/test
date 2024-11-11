@@ -2,12 +2,13 @@ import inspect
 
 
 def introspection_info(obj):
-    if isinstance(obj, (int, list, str, tuple, float, dict, bool)):
-        atribut = dir(obj) # помимо атрибутов, выведет что-то еще
-        methods = obj.__dir__()
-    else:
-        atribut = list(vars(obj).keys())
-        methods = inspect.getmembers(obj, predicate=inspect.ismethod)
+    atribut = []
+    methods = []
+    for elem in dir(obj):
+        if not elem.startswith("_"):
+            atribut.append(elem)
+        else:
+            methods.append(elem)
     type_obj = type(obj)
     modul = inspect.getmodule(obj)
     info = {"type": str(type_obj), "attributes":atribut, "methods": methods, "module": modul}
