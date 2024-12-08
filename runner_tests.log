@@ -1,0 +1,8 @@
+INFO | 'test_run' выполнен успешно'
+WARNING | Неверная скорость для Runner
+Traceback (most recent call last):
+  File "C:\Users\Master\Documents\programm\pythonProject\urban\tests_12_4.py", line 12, in test_walk
+    babulya = Runner("babulya", -3)
+  File "C:\Users\Master\Documents\programm\pythonProject\my_laborotory.py", line 11, in __init__
+    raise ValueError(f'Скорость не может быть отрицательной, сейчас {speed}')
+ValueError: Скорость не может быть отрицательной, сейчас -3

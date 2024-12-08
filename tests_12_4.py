@@ -2,6 +2,8 @@ import logging
 import unittest
 from my_laborotory import Runner
 
+logging.basicConfig(level=logging.INFO, filename="runner_tests.log", filemode="w",
+                    encoding="UTF-8", format="%(levelname)s | %(message)s")
 class RunnerTest(unittest.TestCase):
     is_frozen = False
     @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
@@ -37,5 +39,4 @@ class RunnerTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-    logging.basicConfig(level=logging.INFO, filename="runner_tests.log", filemode="w",
-                        encoding="UTF-8", format="%(levelname)s | %(message)s")
+
