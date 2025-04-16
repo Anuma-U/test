@@ -1,5 +1,6 @@
 https://dzen.ru/id/679de61589a16f5704dec181
 https://www.dmosk.ru/miniinstruktions.php?mini=rsyslog
+https://docs.tenebraefox.ru/pages/3_module.html
 0 service
 1 wiki
 2 image
